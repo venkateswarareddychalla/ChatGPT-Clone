@@ -4,7 +4,7 @@ The application delivers an AI-driven conversational interface, enabling users t
 
 ## 🚀 Live Demo
 
-- **Frontend**: (http://localhost:5173)
+- **Frontend**: (https://chat-gpt-clone-five-indol.vercel.app)
 - **Backend**: (https://chat-gpt-clone-server-seven.vercel.app)
 
 
