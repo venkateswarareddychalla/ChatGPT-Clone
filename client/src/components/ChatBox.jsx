@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
 import Message from "./Message";
+import toast from "react-hot-toast";
 
 const ChatBox = () => {
   const containerRef = useRef(null);
-  const { selectedChat, theme } = useAppContext();
+  const { selectedChat, theme, user, axios, token, setUser } = useAppContext();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
@@ -13,7 +14,40 @@ const ChatBox = () => {
   const [isPublished, setIsPublished] = useState(false);
 
   const onSubmit = async (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
+      if (!user) return toast("Login to send a message");
+      setLoading(true);
+      const promptCopy = prompt;
+      setPrompt("");
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "user",
+          content: prompt,
+          timestamp: Date.now(),
+          isImage: false,
+        },
+      ]);
+      const { data } = await axios.post(`/api/message/${mode}`, {chatId: selectedChat._id, prompt, isPublished}, {headers: {Authorization: token}});
+      if (data.success){
+        setMessages(prev => [...prev, data.reply])
+        // decrease credits
+        if (mode === "image"){
+          setUser(prev => ({...prev, credits: prev.credits-2}))
+        }else{
+          setUser(prev => ({...prev, credits: prev.credits-1}))
+        }
+      }else{
+        toast.error(data.message);
+        setPrompt(promptCopy);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }finally{
+      setPrompt('');
+      setLoading(false)
+    }
   };
 
   useEffect(() => {
@@ -23,13 +57,13 @@ const ChatBox = () => {
   }, [selectedChat]);
 
   useEffect(() => {
-    if(containerRef.current){
+    if (containerRef.current) {
       containerRef.current.scrollTo({
         top: containerRef.current.scrollHeight,
-        behavior: "smooth"
-      })
+        behavior: "smooth",
+      });
     }
-  }, [messages])
+  }, [messages]);
   return (
     <div className="flex-1 flex flex-col justify-between m-5 md:m-10 xl:mx-30 max-md:mt-14 2xl:pr-40">
       {/* Chat Messages */}

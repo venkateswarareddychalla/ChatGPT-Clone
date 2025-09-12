@@ -1,4 +1,5 @@
 import userModel from "../models/userModel.js";
+import chatModel from "../models/chatModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
@@ -36,21 +37,28 @@ export const registerUser = async (req, res) => {
 // API to login user
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  console.log("Login attempt for email:", email);
   try {
     const userExists = await userModel.findOne({ email });
+    console.log("User exists:", !!userExists);
     if (!userExists) {
+      console.log("User not found");
       return res.json({ success: false, message: "User doesn't exist" });
     }
     const isPasswordMatched = await bcrypt.compare(
       password,
       userExists.password
     );
+    console.log("Password match:", isPasswordMatched);
     if(!isPasswordMatched){
+        console.log("Invalid password");
         return res.json({success: false, message: "Invalid username or password"})
     }
     const token = generateToken(userExists._id);
+    console.log("Login successful, token generated");
     return res.json({success: true, token})
   } catch (error) {
+    console.log("Login error:", error.message);
     return res.json({ success: false, message: error.message });
   }
 };

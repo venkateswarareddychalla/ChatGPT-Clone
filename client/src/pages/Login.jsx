@@ -1,17 +1,33 @@
 import React from "react";
 import { useState } from "react";
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 const Login = () => {
   const [state, setState] = useState("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {axios, setToken} = useAppContext()
 
-  const handleSubmit = event => {
-    event.preventDefault()
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const url = state === "login" ? "/api/user/login" : "/api/user/register";
+    try {
+      const {data} = await axios.post(url, {name, email, password});
+      if (data.success){
+        setToken(data.token);
+        localStorage.setItem("token", data.token);
+        toast.success(`Successfully ${state === "login" ? "Logged In" : "Registered"}`);
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
 
   return (
-    <form onClick={handleSubmit} className="flex flex-col gap-4 m-auto items-start p-8 py-12 w-80 sm:w-[352px] text-gray-500 rounded-lg shadow-xl border border-gray-200 bg-white">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 m-auto items-start p-8 py-12 w-80 sm:w-[352px] text-gray-500 rounded-lg shadow-xl border border-gray-200 bg-white">
       <p className="text-2xl font-medium m-auto">
         <span className="text-purple-700">User</span>{" "}
         {state === "login" ? "Login" : "Sign Up"}
