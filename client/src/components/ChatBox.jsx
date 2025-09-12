@@ -83,16 +83,16 @@ const ChatBox = () => {
         {messages.map((message, index) => (
           <Message key={index} message={message} />
         ))}
-      </div>
 
-      {/* Three Dots Loading */}
-      {loading && (
-        <div className="loader flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
-        </div>
-      )}
+        {/* Three Dots Loading */}
+        {loading && (
+          <div className="loader flex items-center gap-1.5 mt-2 ml-4">
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-500 dark:bg-white animate-bounce"></div>
+          </div>
+        )}
+      </div>
 
       {mode === "image" && (
         <label className="inline-flex items-center gap-2 mb-3 text-sm mx-auto">
