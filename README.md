@@ -1,47 +1,18 @@
-# 🍽️ QuickGPT Full-Stack Application
+# QuickGPT Full-Stack Application
 
-A complete chat and image sharing ecosystem built with **React 19**, **Node.js**, **Express**, and **MongoDB**. This full-stack solution includes a customer-facing frontend, admin panel, and robust backend API with payment integration.
+The application delivers an AI-driven conversational interface, enabling users to communicate with an intelligent assistant, exchange images, and obtain contextual responses instantly. It seamlessly merges natural language interaction with multimedia functionality.
 
 ## 🚀 Live Demo
 
-- **Frontend**: [Local Development](http://localhost:5173)
-- **Backend**: [Local Development](http://localhost:3000)
+- **Frontend**: (http://localhost:5173)
+- **Backend**: (https://chat-gpt-clone-server-seven.vercel.app)
 
 
 ## 📋 Project Overview
 
-This is a complete chat and image sharing platform with three main components:
-1. **Customer Frontend** - Chat interface, user authentication, and community image gallery
-2. **Admin Panel** - Manage users, chats, and view analytics (if implemented)
-3. **Backend API** - RESTful API handling all business logic, authentication, and data management
-
-## 🛠️ Tech Stack
-
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB object modeling
-- **JWT** - JSON Web Tokens for authentication
-- **Bcrypt** - Password hashing
-- **Multer** - File upload handling (via ImageKit)
-- **Stripe** - Payment processing
-- **CORS** - Cross-origin resource sharing
-- **Axios** - HTTP client
-- **OpenAI** - AI integration (Gemini API)
-- **ImageKit** - Image management
-
-### Frontend
-- **React 19** - Modern React with latest features
-- **Vite** - Build tool and dev server
-- **React Router DOM** - Client-side routing
-- **Axios** - HTTP client for API calls
-- **Tailwind CSS** - Utility-first CSS framework
-- **React Hot Toast** - User notifications
-- **Prism.js** - Syntax highlighting
-
-### Admin Panel
-- (Not fully implemented in provided code, but can be extended)
+This is a complete chat and image sharing platform with two main components:
+1. **Frontend** - Chat interface, user authentication, and community image gallery
+2. **Backend API** - RESTful API handling all business logic, authentication, and data management
 
 ## 📁 Project Structure
 
@@ -170,7 +141,6 @@ http://localhost:3000
 
 ## 🎯 Features
 
-### Customer Features
 - User registration and login with JWT authentication
 - Chat interface for AI conversations
 - Image generation and sharing
@@ -178,9 +148,6 @@ http://localhost:3000
 - Credit-based payment system with Stripe
 - Dark/light theme support
 - Responsive design for mobile and desktop
-
-### Admin Features
-- (Extendable for admin panel)
 
 ## 🚀 Running the Applications
 
