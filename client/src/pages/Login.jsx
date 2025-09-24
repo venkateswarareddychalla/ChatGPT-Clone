@@ -17,7 +17,6 @@ const Login = () => {
       if (data.success){
         setToken(data.token);
         localStorage.setItem("token", data.token);
-        toast.success(`Successfully ${state === "login" ? "Logged In" : "Registered"}`);
       }else{
         toast.error(data.message)
       }
